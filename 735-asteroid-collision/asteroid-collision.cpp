@@ -17,8 +17,6 @@ public:
             else  if(st.top()==-a[i]){
                 st.pop();
             }
-            
-            
             }
             else{
                 st.push(a[i]);
