@@ -18,18 +18,20 @@ public:
       }
       st.push(i);
      }
-    
+          int nse = n;
+    int pse = -1; 
    
     while(! st.empty() ){
       int num = st.top();
       st.pop();
-       int nse = n;
-    int pse = -1;
+
       if(!st.empty()){
         pse = st.top();
       }
+      else{
+        pse = -1;
+      }
       ans = max(ans,a[num]*(nse-pse-1));
-      nse = num ;
     }
     return ans ;
     }
