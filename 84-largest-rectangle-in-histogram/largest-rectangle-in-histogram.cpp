@@ -2,51 +2,35 @@ class Solution {
 public:
     int largestRectangleArea(vector<int>&a) {
         //  a[i] *(nse - pse -1);
-      int n = a.size();
-        vector<pair<int,int>>nexts(n);
-        vector<pair<int,int>>prevs(n);
-        stack<pair<int,int>>st;
-        for(int i = n- 1;i>=0;i--){
-            while(!st.empty() && st.top().first>a[i]){
-                st.pop();
-            }
-            if(st.empty()){
-                nexts[i] = {-1,-1};
-            }else{
-                nexts[i] = st.top();
-            }
-            st.push({a[i],i});
+        int n = a.size();
+     stack<int>st;
+     int ans = 0;
+     for(int i = 0;i<n;i++){
+      while(!st.empty() && a[st.top()]>a[i]){
+        int nse = i;
+        int pse = -1;
+        int num = st.top();
+        st.pop();
+        if(!st.empty()){
+            pse = st.top();
         }
-        while(!st.empty()){
-            st.pop();
-        }
-
-        for(int i = 0;i<n;i++){
-            while(!st.empty() && st.top().first>=a[i]){
-                st.pop();
-            }
-             if(st.empty()){
-                prevs[i] = {-1,-1};
-            }else{
-                prevs[i] = st.top();
-            }
-            st.push({a[i],i});
-        }
-        int MOD = 1e9+7 ;
-        long long ans = 0;
-        for(int i = 0 ;i<n;i++){
-            int left = -1;
-            int right = n;
-            if(prevs[i].second!=-1){
-                left = prevs[i].second ;
-            }
-            if(nexts[i].second!=-1){
-                right = nexts[i].second ;
-            }
-            // cout<<left<<" "<<i<<" "<<right<<endl;
-           ans = max(ans,1LL*(right-left-1)*a[i]);
-        }
-        return ans ;
-
+        ans = max(ans , a[num]*(nse-pse-1));
+      }
+      st.push(i);
+     }
+    
+   
+    while(! st.empty() ){
+      int num = st.top();
+      st.pop();
+       int nse = n;
+    int pse = -1;
+      if(!st.empty()){
+        pse = st.top();
+      }
+      ans = max(ans,a[num]*(nse-pse-1));
+      nse = num ;
+    }
+    return ans ;
     }
 };
