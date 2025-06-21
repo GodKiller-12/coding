@@ -11,21 +11,32 @@
  #define Node ListNode* 
 class Solution {
 public:
+Node solve(Node head){
+    if(head == NULL || head->next == NULL){
+        return head ;
+    }
+    Node ans = solve(head->next);
+    head ->next->next = head ;
+    head->next = NULL;
+    return ans ;
+}
+
     bool isPalindrome(ListNode* head) {
-        map<Node ,Node>mp;
-        Node temp = head;
-        int count = 0;
-        while(temp->next!=NULL){
-            Node curr = temp ;
-            temp = temp->next ;
-            mp[temp] = curr ;
+      Node slow = head ;
+      Node fast = head ;
+      while(fast->next != NULL && fast->next->next != NULL){
+        slow = slow ->next ;
+        fast = fast->next->next ;
+      }
+      Node temp = solve(slow->next);
+      Node start = head ;
+      while(temp!= NULL){
+        if(temp->val!= start->val){
+            return false ;
         }
-       Node f = head;
-       while(f->val==temp->val){
-        f = f->next ;
-        temp = mp[temp];
-        if(f==temp) return true ;
-       }
-       return false ;
+        temp = temp->next;
+        start = start->next ;
+      }
+      return true ;
     }
 };
