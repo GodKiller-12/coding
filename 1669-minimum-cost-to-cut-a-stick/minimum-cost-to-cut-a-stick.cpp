@@ -1,21 +1,18 @@
 class Solution {
 public:
-struct pair_hash {
-    size_t operator()(const pair<int,int>& p) const {
-        return hash<int>()(p.first) ^ hash<int>()(p.second << 1);
-    }
-};
 
-unordered_map<pair<int,int>,int, pair_hash> mp;
+
+map<pair<int,int>,int> mp;
 
 int rec(int i , int j , vector<int>& cuts){
+    if((j-i)==1) return 0;
     bool found = false;
     for(int k = 0; k < cuts.size(); k++){
         if(cuts[k] > i && cuts[k] < j){
             found = true;
+            break;
         }
     }
-
     if(!found){
         return 0;
     }
@@ -27,6 +24,7 @@ int rec(int i , int j , vector<int>& cuts){
         if(cuts[k] > i && cuts[k] < j){
             ans = min(ans, (j - i) + rec(i, cuts[k], cuts) + rec(cuts[k], j, cuts));
         }
+        
     }
 
     return mp[{i,j}] = ans;
