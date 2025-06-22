@@ -33,6 +33,7 @@ int rec(int i , int j , vector<int>& cuts){
 }
 
 int minCost(int n, vector<int>& cuts) {
+    sort(cuts.begin(),cuts.end());
     return rec(0, n, cuts);
 }
 };
