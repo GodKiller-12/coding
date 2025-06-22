@@ -27,18 +27,20 @@ int dp[305][305];
             dp[i][j] = 0; 
            }
            else{
-int ans = INT_MIN;
-for(int k = i;k<=j;k++){
-    ans = max(ans,a[i-1]*a[k]*a[j+1] + dp[i][k-1] + dp[k+1][j]);
-}
-dp[i][j] = ans ;
+  int ans = INT_MIN;
+        for (int k = i; k <= j; k++) {
+            int left = (k > i) ? dp[i][k - 1] : 0;
+            int right = (k < j) ? dp[k + 1][j] : 0;
+            ans = max(ans, a[i - 1] * a[k] * a[j + 1] + left + right);
+        }
+        dp[i][j] = ans;
            }
         }
     }
 
 
 
-return dp[1][n]+2;
+return dp[1][n];
 
     }
 };
