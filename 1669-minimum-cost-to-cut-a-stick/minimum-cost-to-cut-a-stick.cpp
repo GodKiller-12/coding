@@ -1,37 +1,27 @@
 class Solution {
 public:
-
-
-map<pair<int,int>,int> mp;
-
+int dp[101][101];
 int rec(int i , int j , vector<int>& cuts){
-    if((j-i)==1) return 0;
-    bool found = false;
-    for(int k = 0; k < cuts.size(); k++){
-        if(cuts[k] > i && cuts[k] < j){
-            found = true;
-            break;
-        }
-    }
-    if(!found){
-        return 0;
-    }
-
-    if(mp.count({i,j})) return mp[{i,j}];
-
-    int ans = INT_MAX;
-    for(int k = 0; k < cuts.size(); k++){
-        if(cuts[k] > i && cuts[k] < j){
-            ans = min(ans, (j - i) + rec(i, cuts[k], cuts) + rec(cuts[k], j, cuts));
-        }
-        
-    }
-
-    return mp[{i,j}] = ans;
+   if(i>j){
+    return 0;
+   }
+   if(dp[i][j]!=-1){
+    return dp[i][j];
+   }
+   int ans = INT_MAX;
+   for(int k = i ;k<=j;k++){
+    ans = min(ans , cuts[j+1]-cuts[i-1] + rec(i,k-1,cuts) + rec(k+1,j,cuts));
+   }
+   return dp[i][j] = ans ;
 }
 
 int minCost(int n, vector<int>& cuts) {
+    cuts.push_back(0);
+    cuts.push_back(n);
     sort(cuts.begin(),cuts.end());
-    return rec(0, n, cuts);
+    memset(dp,-1,sizeof(dp));
+    int N = cuts.size();
+    return rec(1,N-2, cuts);
+    
 }
 };
