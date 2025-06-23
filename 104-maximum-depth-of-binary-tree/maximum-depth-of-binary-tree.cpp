@@ -12,17 +12,11 @@
  #define Node TreeNode* 
 class Solution {
 public:
-    int rec(Node root){
+    int h(Node root){
         if(!root) return 0;
-        if(root->right == nullptr && root->left == NULL){
-            return 1;
-        }
-        int leftheight = rec(root->left);
-        int rightheight = rec(root->right);
-        int height = 1 + max(leftheight,rightheight);
-        return height ;
+        return 1 + max(h(root->right),h(root->left));
     }
     int maxDepth(TreeNode* root) {
-        return rec(root);
+        return h(root);
     }
 };
