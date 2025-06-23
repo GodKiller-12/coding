@@ -17,17 +17,13 @@ bool rec(Node p, Node q){
     if(!p && !q){
         return true ;
     }
-    if(!p && q || p && !q){
+    if(!p || !q){
         return false ;
     }
-        bool ans = true ;
         if(p->val != q->val){
-           ans = false ;
+           return false ;
         }
-        ans = ans && rec(p->left,q->left);
-        ans = ans && rec(p->right,q->right);
-
-        return ans ;
+        return  rec(p->left,q->left) && rec(p->right,q->right); ;
 }
     bool isSameTree(TreeNode* p, TreeNode* q) {
         return rec(p,q);
