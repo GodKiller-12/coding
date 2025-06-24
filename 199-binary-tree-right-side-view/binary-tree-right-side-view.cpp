@@ -13,8 +13,9 @@
  #define pb push_back
 class Solution {
 public:
-vector<int>rns ;
+
     vector<int> rightSideView(TreeNode* root) {
+        vector<int>rns ;
             if(root==NULL){
             return {};
         }
