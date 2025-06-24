@@ -23,11 +23,7 @@ int rec(Node root){
     }
     int leftsum = rec(root->left) ;
     int rightsum = rec(root->right) ;
-    maxi = max(maxi,root->val);
      maxi = max(maxi,leftsum + rightsum + root->val);
-     maxi = max(root->val+leftsum,maxi);
-     maxi = max(root->val + rightsum,maxi);
-
     return max({leftsum+root->val,rightsum + root->val,root->val,0});
 }
     int maxPathSum(TreeNode* root) {
