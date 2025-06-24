@@ -19,6 +19,9 @@ bool check(Node p, Node q) {
            check(p->right, q->left);
 }
     bool isSymmetric(TreeNode* root) {
-        return check(root,root);
+        bool ans = check(root,root);
+        root->left = nullptr ;
+        root->right = nullptr;
+        return ans ;
     }
 };
