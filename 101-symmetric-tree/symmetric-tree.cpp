@@ -12,15 +12,11 @@
  #define Node TreeNode*
 class Solution {
 public:
-bool check(Node p , Node q){
-    if(!p && !q){
-        return true;
-    }
-    if(!p || !q){
-        return false ;
-    }
-    if(p->val != q->val) return false ;
-    return check(p->right , q->left ) && check(p->left,q->right);
+bool check(Node p, Node q) {
+    if (!p || !q) return p == q;
+    return (p->val == q->val) &&
+           check(p->left, q->right) &&
+           check(p->right, q->left);
 }
     bool isSymmetric(TreeNode* root) {
         return check(root,root);
