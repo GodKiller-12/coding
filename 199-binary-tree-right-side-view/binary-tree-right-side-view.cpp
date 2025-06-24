@@ -18,15 +18,16 @@ vector<int>rns ;
             if(root==NULL){
             return {};
         }
-        vector<vector<int>>ans;
         queue<Node>q;
         q.push(root);
         while(!q.empty()){
             int count = q.size();
             vector<int>temp;
             while(count--){
-                auto x = q.front();
-                temp.pb(x->val);
+                auto x = q.front(); 
+                if(count==0){
+                rns.pb(x->val);
+                }
                 if(x->left!=NULL){
                     q.push(x->left);
                 }
@@ -35,10 +36,6 @@ vector<int>rns ;
                 }
                 q.pop();
             }
-            ans.pb(temp);
-        }
-        for(int i = 0;i<ans.size();i++){
-            rns.push_back(ans[i][ans[i].size()-1]);
         }
         return rns ;
     }
