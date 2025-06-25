@@ -11,20 +11,16 @@
  */
 class Solution {
 public:
-    int func(TreeNode *node,int level){
+    int func(TreeNode *node){
        if(!node)
          { return 0;}
 
-        int count = 1+func(node->left,level+1) + func(node->right,level +1 );
-
+        int count = 1+func(node->left) + func(node->right);
         return count ;
 
     }
 
     int countNodes(TreeNode* root) {
-        return func(root,1);
-      
-       
-
+        return func(root);
     }
 };
