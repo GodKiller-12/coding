@@ -14,10 +14,8 @@ public:
     int func(TreeNode *node){
        if(!node)
          { return 0;}
-
         int count = 1+func(node->left) + func(node->right);
         return count ;
-
     }
 
     int countNodes(TreeNode* root) {
