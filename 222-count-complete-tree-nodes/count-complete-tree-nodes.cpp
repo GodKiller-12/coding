@@ -23,16 +23,9 @@ public:
     }
 
     int func(TreeNode *node,int level){
-        if(node->left==NULL && node->right==NULL){
-            if(level==h-1){
-                return 1;
-            }
-            return 1;
-        }
-        if(node->left==NULL || node->right ==NULL){
-            return 2;
-        }
-         
+       if(!node)
+         { return 0;}
+
         int count = 1+func(node->left,level+1) + func(node->right,level +1 );
 
         return count ;
