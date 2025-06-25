@@ -11,17 +11,6 @@
  */
 class Solution {
 public:
-   int h ;
-     int rec(TreeNode* root){
-     if(root ==NULL){
-        return 0;
-     }
-     int ans = 0;
-     int left = 1 + rec(root->left);
-     int right = 1 + rec (root->right);
-     return max(left,right);
-    }
-
     int func(TreeNode *node,int level){
        if(!node)
          { return 0;}
@@ -33,15 +22,8 @@ public:
     }
 
     int countNodes(TreeNode* root) {
-        if(root==NULL){
-            return 0;
-        }
-     
-        int height = rec(root);
-           h = height ;
-        int count = pow(2,height) - 1;
-        int k =  func(root,1);
-        return k ;
+        return func(root,1);
+      
        
 
     }
